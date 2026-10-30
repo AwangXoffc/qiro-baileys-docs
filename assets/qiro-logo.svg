@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 300" role="img" aria-labelledby="title desc">
+  <title id="title">Qiro Baileys by AwangXCode</title>
+  <desc id="desc">Qiro Baileys wordmark with a teal angular crowned emblem.</desc>
+  <defs>
+    <linearGradient id="word" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e9fff9"/>
+      <stop offset=".48" stop-color="#64f4cb"/>
+      <stop offset="1" stop-color="#21c9bd"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(12 14) scale(.52)">
+    <path d="M256 28 300 76 389 58 365 151 429 218 389 335 256 478 123 335 83 218 147 151 123 58 212 76Z" fill="#07121d" stroke="#19d8b0" stroke-width="15" stroke-linejoin="round"/>
+    <path d="M256 28 300 76 256 116 212 76Z" fill="#84ffe0"/>
+    <path d="M123 58 205 107 151 151 83 218ZM389 58 307 107 361 151 429 218Z" fill="#18cfa8"/>
+    <path d="M151 151 256 116 361 151 343 260 256 350 169 260Z" fill="#0c2330" stroke="#36e7bc" stroke-width="9"/>
+    <path d="M164 219 235 239 199 285 150 269ZM348 219 277 239 313 285 362 269Z" fill="#c7fff0"/>
+    <path d="M256 235 293 300 256 339 219 300Z" fill="#23dcb4"/>
+    <path d="M169 260 203 324 256 382 309 324 343 260 325 354 256 441 187 354Z" fill="#0fae9d"/>
+  </g>
+  <text x="300" y="144" font-family="Inter, Arial, sans-serif" font-size="112" font-weight="900" letter-spacing="2" fill="#f3fffc">QIRO</text>
+  <text x="595" y="144" font-family="Inter, Arial, sans-serif" font-size="112" font-weight="900" letter-spacing="-2" fill="url(#word)">BAILEYS</text>
+  <path d="M305 180H1050" stroke="#1edab4" stroke-width="5" opacity=".8"/>
+  <text x="308" y="233" font-family="Inter, Arial, sans-serif" font-size="31" font-weight="700" letter-spacing="6" fill="#9ab8c4">AWANGXCODE · WHATSAPP WEB TOOLKIT</text>
+</svg>

@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#040A11">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="favicon.svg">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Qiro Baileys — Developer Documentation">
+  <meta property="og:description" content="Developer documentation for Qiro Baileys by AwangXCode.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/AwangXoffc/qiro-baileys-assets/main/qiro-banner.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Qiro Baileys — Developer Documentation">
+  <meta name="twitter:description" content="Developer documentation for Qiro Baileys by AwangXCode.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/AwangXoffc/qiro-baileys-assets/main/qiro-banner.png">
+  <meta name="description" content="Qiro Baileys documentation — an unofficial Baileys-based TypeScript toolkit with experimental Qiro extensions by AwangXCode.">
+  <title>Qiro Baileys — Developer Documentation</title>
+  <style>
+    :root {
+      color-scheme: dark light;
+      --bg: #040A11;
+      --bg-elevated: #07121d;
+      --surface: #0b1c27;
+      --surface-2: #102532;
+      --surface-3: #163341;
+      --text: #f4f5fb;
+      --muted: #a4abc1;
+      --subtle: #737d98;
+      --border: rgba(167, 177, 211, .15);
+      --border-strong: rgba(167, 177, 211, .25);
+      --primary: #17d6ad;
+      --primary-strong: #0ea889;
+      --cyan: #21c9bd;
+      --green: #22e3b6;
+      --amber: #fcd34d;
+      --code: #050d14;
+      --shadow: 0 24px 80px rgba(0, 0, 0, .28);
+      --radius: 18px;
+      --sidebar-width: 270px;
+      --content-width: 1050px;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    html[data-theme="light"] {
+      color-scheme: light;
+      --bg: #effaf7;
+      --bg-elevated: #ffffff;
+      --surface: #ffffff;
+      --surface-2: #f0f1f8;
+      --surface-3: #e7e9f3;
+      --text: #161827;
+      --muted: #515a73;
+      --subtle: #75809b;
+      --border: rgba(42, 50, 79, .12);
+      --border-strong: rgba(42, 50, 79, .2);
+      --primary: #087f69;
+      --primary-strong: #066c5b;
+      --cyan: #087f9b;
+      --green: #167347;
+      --amber: #8a5a00;
+      --code: #151a28;
+      --shadow: 0 24px 70px rgba(35, 40, 75, .1);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 104px; }
+    body {
+      min-width: 320px;
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 78% 2%, rgba(23, 214, 173, .12), transparent 35rem),
+        radial-gradient(ellipse at 4% 35%, rgba(33, 201, 189, .08), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+      transition: background-color .2s ease, color .2s ease;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+    button { color: inherit; }
+    .skip-link { position: absolute; left: 12px; top: -60px; z-index: 1000; padding: 10px 14px; border-radius: 10px; background: var(--primary-strong); color: white; }
+    .skip-link:focus { top: 12px; }
+    .ambient-grid {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: .18;
+      background-image: linear-gradient(rgba(167, 177, 211, .06) 1px, transparent 1px), linear-gradient(90deg, rgba(167, 177, 211, .06) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, black, transparent 78%);
+    }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 0 30px;
+      border-bottom: 1px solid var(--border);
+      background: color-mix(in srgb, var(--bg-elevated) 86%, transparent);
+      backdrop-filter: blur(18px);
+    }
+    .brand { display: inline-flex; align-items: center; gap: 12px; min-width: 220px; }
+    .brand-mark {
+      display: grid;
+      width: 38px;
+      height: 38px;
+      place-items: center;
+      border: 1px solid rgba(167, 139, 250, .42);
+      border-radius: 12px;
+      background: linear-gradient(145deg, rgba(139, 92, 246, .28), rgba(34, 211, 238, .12));
+      box-shadow: inset 0 1px rgba(255,255,255,.13), 0 7px 28px rgba(124,58,237,.18);
+      color: var(--primary);
+      font-size: 19px;
+      font-weight: 900;
+      letter-spacing: -2px;
+    }
+    .brand-logo { display: block; width: min(232px, 29vw); height: auto; }
+    .brand-name { display: block; font-size: 13px; line-height: 1.2; font-weight: 850; letter-spacing: .11em; }
+    .brand-sub { display: block; margin-top: 4px; color: var(--subtle); font-size: 9px; font-weight: 750; letter-spacing: .16em; }
+    .topbar-center { flex: 1; display: flex; justify-content: center; }
+    .search-trigger {
+      width: min(100%, 430px);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: var(--surface);
+      color: var(--muted);
+      cursor: pointer;
+      text-align: left;
+    }
+    .search-trigger:hover { border-color: var(--border-strong); background: var(--surface-2); }
+    .search-trigger .search-label { flex: 1; font-size: 12px; }
+    .keycap { padding: 2px 6px; border: 1px solid var(--border-strong); border-radius: 5px; color: var(--subtle); font-size: 10px; }
+    .top-actions { display: flex; align-items: center; gap: 9px; }
+    .icon-button, .menu-button {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: var(--surface);
+      cursor: pointer;
+    }
+    .icon-button:hover, .menu-button:hover { border-color: var(--border-strong); background: var(--surface-2); }
+    .top-link { padding: 8px 13px; border: 1px solid var(--border); border-radius: 10px; color: var(--muted); font-size: 12px; font-weight: 750; }
+    .top-link:hover { border-color: var(--primary); color: var(--text); }
+    .menu-button { display: none; }
+    .layout { display: grid; grid-template-columns: var(--sidebar-width) minmax(0, 1fr); max-width: 1540px; min-height: calc(100vh - 72px); margin: 0 auto; }
+    .sidebar {
+      position: sticky;
+      top: 72px;
+      height: calc(100vh - 72px);
+      overflow: auto;
+      padding: 30px 18px 28px 26px;
+      border-right: 1px solid var(--border);
+      scrollbar-width: thin;
+      scrollbar-color: var(--border-strong) transparent;
+    }
+    .sidebar-label { margin: 0 0 10px 11px; color: var(--subtle); font-size: 9px; font-weight: 850; letter-spacing: .17em; text-transform: uppercase; }
+    .nav-group { margin-bottom: 27px; }
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-height: 37px;
+      margin: 2px 0;
+      padding: 7px 11px;
+      border: 1px solid transparent;
+      border-radius: 9px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 630;
+      transition: .15s ease;
+    }
+    .nav-link .nav-icon { width: 17px; color: var(--subtle); text-align: center; font-size: 13px; }
+    .nav-link:hover { background: var(--surface); color: var(--text); }
+    .nav-link.active { border-color: rgba(167,139,250,.2); background: linear-gradient(90deg, rgba(139,92,246,.16), rgba(139,92,246,.04)); color: var(--primary); }
+    .nav-link.active .nav-icon { color: var(--primary); }
+    .sidebar-card { margin-top: 30px; padding: 15px; border: 1px solid var(--border); border-radius: 14px; background: linear-gradient(145deg, var(--surface), var(--surface-2)); }
+    .sidebar-card strong { display: block; margin-bottom: 5px; font-size: 11px; }
+    .sidebar-card p { margin: 0 0 12px; color: var(--muted); font-size: 10px; line-height: 1.6; }
+    .sidebar-card a { color: var(--primary); font-size: 10px; font-weight: 800; }
+    main { min-width: 0; padding: 40px clamp(22px, 5vw, 76px) 90px; }
+    .content { width: min(100%, var(--content-width)); margin: 0 auto; }
+    .breadcrumbs { display: flex; align-items: center; gap: 9px; margin: 0 0 25px; color: var(--subtle); font-size: 10px; font-weight: 720; letter-spacing: .08em; text-transform: uppercase; }
+    .breadcrumbs span:last-child { color: var(--primary); }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(22px, 4vw, 42px);
+      border: 1px solid var(--border-strong);
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(123, 75, 220, .18), rgba(33, 201, 189, .08) 55%, var(--surface));
+      box-shadow: var(--shadow);
+    }
+    .hero::before { position: absolute; content: ""; width: 300px; height: 300px; right: -120px; top: -150px; border-radius: 50%; background: rgba(139,92,246,.2); filter: blur(50px); pointer-events: none; }
+    .hero-top { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--cyan); font-size: 9px; font-weight: 900; letter-spacing: .2em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 18px; height: 1px; background: currentColor; }
+    .hero-status { padding: 5px 9px; border: 1px solid rgba(252,211,77,.24); border-radius: 999px; background: rgba(252,211,77,.08); color: var(--amber); font-size: 9px; font-weight: 800; letter-spacing: .06em; white-space: nowrap; }
+    .hero h1 { position: relative; z-index: 1; margin: 17px 0 10px; font-size: clamp(34px, 6vw, 64px); line-height: .99; font-weight: 950; letter-spacing: -.065em; }
+    .hero h1 span { color: transparent; background: linear-gradient(100deg, #f3fffc, #17d6ad 48%, #21c9bd); background-clip: text; -webkit-background-clip: text; }
+    .hero-copy { position: relative; z-index: 1; max-width: 650px; margin: 0; color: var(--muted); font-size: clamp(13px, 1.5vw, 15px); }
+    .hero-image-wrap { position: relative; z-index: 1; overflow: hidden; margin-top: 27px; border: 1px solid rgba(195, 177, 255, .22); border-radius: 15px; background: #11121c; }
+    .hero-image { display: block; width: 100%; aspect-ratio: 16 / 5.1; object-fit: cover; }
+    .hero-actions { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 42px; padding: 0 16px; border: 1px solid var(--border-strong); border-radius: 10px; background: var(--surface-2); color: var(--text); font-size: 11px; font-weight: 820; transition: transform .15s ease, border-color .15s ease; }
+    .button:hover { transform: translateY(-2px); border-color: var(--primary); }
+    .button.primary { border-color: transparent; background: linear-gradient(110deg, #7c3aed, #5b4bd8); color: #fff; box-shadow: 0 8px 24px rgba(124,58,237,.23); }
+    .button.ghost { background: transparent; }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 19px; }
+    .badge { padding: 5px 9px; border: 1px solid var(--border); border-radius: 7px; background: color-mix(in srgb, var(--surface) 80%, transparent); color: var(--muted); font-size: 9px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
+    .badge.purple { border-color: rgba(167,139,250,.25); color: var(--primary); }
+    .badge.cyan { border-color: rgba(103,232,249,.22); color: var(--cyan); }
+    .section { padding-top: 62px; scroll-margin-top: 96px; }
+    .section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; margin-bottom: 21px; }
+    .section-kicker { display: block; margin-bottom: 6px; color: var(--primary); font-size: 9px; font-weight: 900; letter-spacing: .18em; text-transform: uppercase; }
+    h2 { margin: 0; font-size: clamp(23px, 3vw, 30px); line-height: 1.2; letter-spacing: -.045em; }
+    h3 { margin: 0; font-size: 14px; letter-spacing: -.02em; }
+    .section-intro { max-width: 690px; margin: 10px 0 0; color: var(--muted); font-size: 13px; }
+    .text-link { color: var(--primary); font-size: 11px; font-weight: 800; white-space: nowrap; }
+    .text-link:hover { text-decoration: underline; }
+    .feature-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .feature-card { min-height: 174px; padding: 18px; border: 1px solid var(--border); border-radius: 15px; background: linear-gradient(145deg, var(--surface), color-mix(in srgb, var(--surface-2) 65%, transparent)); transition: transform .18s ease, border-color .18s ease; }
+    .feature-card:hover { transform: translateY(-3px); border-color: var(--border-strong); }
+    .feature-icon { display: grid; width: 34px; height: 34px; margin-bottom: 16px; place-items: center; border: 1px solid rgba(167,139,250,.24); border-radius: 10px; background: rgba(139,92,246,.1); color: var(--primary); font-size: 16px; }
+    .feature-card:nth-child(2) .feature-icon, .feature-card:nth-child(5) .feature-icon { border-color: rgba(103,232,249,.23); background: rgba(8,145,178,.1); color: var(--cyan); }
+    .feature-card p { margin: 7px 0 12px; color: var(--muted); font-size: 11px; line-height: 1.65; }
+    .status { display: inline-flex; align-items: center; gap: 6px; color: var(--amber); font-size: 9px; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
+    .status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; box-shadow: 0 0 10px currentColor; }
+    .install-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; }
+    .install-card { overflow: hidden; border: 1px solid var(--border); border-radius: 15px; background: var(--surface); }
+    .install-card-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 15px 16px; border-bottom: 1px solid var(--border); }
+    .install-card-head strong { font-size: 12px; }
+    .install-card-head span { color: var(--subtle); font-size: 9px; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
+    .code-block { position: relative; padding: 17px 48px 17px 17px; background: var(--code); color: #d7deef; font: 11px/1.7 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; overflow-x: auto; }
+    .code-block code { white-space: nowrap; }
+    .code-block .prompt { color: #67e8f9; }
+    .copy-button { position: absolute; top: 10px; right: 10px; display: grid; width: 29px; height: 29px; place-items: center; border: 1px solid rgba(167,177,211,.2); border-radius: 7px; background: rgba(255,255,255,.04); color: #b9c2d9; cursor: pointer; }
+    .copy-button:hover { border-color: rgba(167,139,250,.6); color: #fff; }
+    .notice { display: flex; align-items: flex-start; gap: 12px; margin-top: 14px; padding: 14px 16px; border: 1px solid rgba(103,232,249,.2); border-radius: 12px; background: rgba(8,145,178,.07); color: var(--muted); font-size: 11px; }
+    .notice strong { color: var(--cyan); }
+    .notice .notice-icon { color: var(--cyan); font-size: 15px; }
+    .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; counter-reset: step; }
+    .step { position: relative; padding: 18px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); counter-increment: step; }
+    .step::before { content: "0" counter(step); display: block; margin-bottom: 14px; color: var(--primary); font: 800 10px ui-monospace, monospace; letter-spacing: .1em; }
+    .step p { margin: 7px 0 0; color: var(--muted); font-size: 11px; }
+    .code-large { overflow: hidden; border: 1px solid var(--border); border-radius: 15px; background: var(--code); }
+    .code-titlebar { display: flex; align-items: center; justify-content: space-between; padding: 11px 15px; border-bottom: 1px solid rgba(167,177,211,.12); color: #aab4cc; font-size: 10px; }
+    .window-dots { display: flex; gap: 5px; }
+    .window-dots i { width: 7px; height: 7px; border-radius: 50%; background: #6c7190; }
+    .code-large pre { margin: 0; padding: 20px; overflow-x: auto; color: #d7deef; font: 11px/1.85 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+    .tok-purple { color: #c4b5fd; }
+    .tok-cyan { color: #67e8f9; }
+    .tok-green { color: #86efac; }
+    .tok-muted { color: #7f8aa6; }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 14px; }
+    table { width: 100%; border-collapse: collapse; min-width: 520px; background: var(--surface); text-align: left; }
+    th, td { padding: 13px 15px; border-bottom: 1px solid var(--border); font-size: 11px; }
+    th { background: var(--surface-2); color: var(--subtle); font-size: 9px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+    td { color: var(--muted); }
+    td:first-child { color: var(--text); font-weight: 750; }
+    tr:last-child td { border-bottom: 0; }
+    .faq-list { display: grid; gap: 9px; }
+    details { border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
+    summary { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 14px 16px; cursor: pointer; font-size: 12px; font-weight: 760; list-style: none; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; color: var(--primary); font-size: 18px; font-weight: 500; }
+    details[open] summary::after { content: "−"; }
+    details p { margin: 0; padding: 0 16px 15px; color: var(--muted); font-size: 11px; }
+    .terminal { overflow: hidden; border: 1px solid var(--border); border-radius: 15px; background: #080b13; box-shadow: var(--shadow); }
+    .terminal-head { display: flex; align-items: center; gap: 7px; padding: 12px 15px; border-bottom: 1px solid rgba(167,177,211,.13); color: #8590aa; font-size: 10px; }
+    .terminal-head i { width: 7px; height: 7px; border-radius: 50%; background: #8b5cf6; }
+    .terminal-body { padding: 20px; color: #d9e0f2; font: 11px/1.9 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+    .terminal-body .purple { color: #c4b5fd; }
+    .terminal-body .cyan { color: #67e8f9; }
+    .terminal-body .green { color: #86efac; }
+    .terminal-body .muted { color: #818ba6; }
+    .resource-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 11px; }
+    .resource { display: flex; min-height: 112px; flex-direction: column; justify-content: space-between; padding: 15px; border: 1px solid var(--border); border-radius: 13px; background: var(--surface); transition: border-color .15s ease, transform .15s ease; }
+    .resource:hover { transform: translateY(-2px); border-color: var(--primary); }
+    .resource span { color: var(--subtle); font-size: 9px; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
+    .resource strong { font-size: 12px; }
+    .resource em { color: var(--primary); font-size: 10px; font-style: normal; }
+    .callout { padding: 19px; border: 1px solid rgba(252,211,77,.22); border-radius: 14px; background: rgba(252,211,77,.06); }
+    .callout strong { display: block; margin-bottom: 5px; color: var(--amber); font-size: 12px; }
+    .callout p { margin: 0; color: var(--muted); font-size: 11px; }
+    footer { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-top: 70px; padding-top: 22px; border-top: 1px solid var(--border); color: var(--subtle); font-size: 10px; }
+    footer strong { color: var(--text); }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 15px; }
+    .footer-links a:hover { color: var(--primary); }
+    .overlay { position: fixed; inset: 0; z-index: 300; display: none; align-items: flex-start; justify-content: center; padding: min(14vh, 110px) 18px 18px; background: rgba(3,5,12,.64); backdrop-filter: blur(8px); }
+    .overlay.open { display: flex; }
+    .search-dialog { width: min(100%, 560px); overflow: hidden; border: 1px solid var(--border-strong); border-radius: 16px; background: var(--bg-elevated); box-shadow: var(--shadow); }
+    .search-input-wrap { display: flex; align-items: center; gap: 10px; padding: 15px; border-bottom: 1px solid var(--border); }
+    .search-input-wrap input { width: 100%; border: 0; outline: 0; background: transparent; color: var(--text); font-size: 13px; }
+    .search-results { max-height: 50vh; overflow: auto; padding: 8px; }
+    .search-result { display: block; padding: 11px 12px; border-radius: 9px; color: var(--muted); font-size: 12px; }
+    .search-result:hover, .search-result:focus { outline: 0; background: var(--surface-2); color: var(--text); }
+    .search-result small { display: block; margin-top: 2px; color: var(--subtle); font-size: 9px; }
+    .search-empty { padding: 20px; color: var(--subtle); text-align: center; font-size: 11px; }
+    .mobile-backdrop { display: none; }
+    .toast { position: fixed; right: 20px; bottom: 20px; z-index: 400; padding: 10px 14px; transform: translateY(20px); border: 1px solid var(--border-strong); border-radius: 10px; background: var(--surface-3); color: var(--text); font-size: 11px; opacity: 0; pointer-events: none; transition: .2s ease; }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    :focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+    @media (max-width: 1050px) {
+      :root { --sidebar-width: 235px; }
+      .topbar { padding: 0 20px; }
+      main { padding-right: 28px; padding-left: 28px; }
+      .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 760px) {
+      .topbar { height: 64px; padding: 0 14px; }
+      .brand { min-width: 0; }
+      .brand-logo { width: 182px; max-width: 44vw; }
+      .brand-sub, .top-link, .topbar-center { display: none; }
+      .menu-button { display: grid; }
+      .layout { display: block; min-height: calc(100vh - 64px); }
+      .sidebar { position: fixed; z-index: 250; top: 64px; bottom: 0; left: 0; width: min(84vw, 300px); height: auto; transform: translateX(-105%); transition: transform .22s ease; border-right: 1px solid var(--border); background: var(--bg-elevated); box-shadow: var(--shadow); }
+      .sidebar.open { transform: translateX(0); }
+      .mobile-backdrop { position: fixed; inset: 64px 0 0; z-index: 240; display: none; background: rgba(2,4,10,.52); }
+      .mobile-backdrop.show { display: block; }
+      main { padding: 25px 17px 65px; }
+      .hero { border-radius: 18px; }
+      .hero-image { aspect-ratio: 16 / 7; }
+      .steps, .resource-grid { grid-template-columns: 1fr; }
+      .install-grid { grid-template-columns: 1fr; }
+      .section { padding-top: 48px; }
+      footer { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 470px) {
+      .feature-grid { grid-template-columns: 1fr; }
+      .feature-card { min-height: auto; }
+      .hero h1 { font-size: 37px; }
+      .hero-top { align-items: flex-start; flex-direction: column; }
+      .section-head { align-items: flex-start; flex-direction: column; }
+      .hero-actions .button { flex: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="ambient-grid" aria-hidden="true"></div>
+  <header class="topbar">
+    <button class="menu-button" id="menuButton" aria-label="Open navigation" aria-expanded="false">☰</button>
+    <a class="brand" href="#top" aria-label="Qiro Baileys home">
+      <img class="brand-logo" src="assets/qiro-logo.svg" alt="Qiro Baileys by AwangXCode">
+    </a>
+    <div class="topbar-center">
+      <button class="search-trigger" id="searchTrigger" aria-label="Search documentation">
+        <span aria-hidden="true">⌕</span><span class="search-label">Search documentation...</span><span class="keycap">Ctrl K</span>
+      </button>
+    </div>
+    <div class="top-actions">
+      <a class="top-link" href="https://www.npmjs.com/package/@awangxcode/qiro-baileys" target="_blank" rel="noreferrer">NPM PACKAGE ↗</a>
+      <button class="icon-button" id="themeButton" aria-label="Switch color theme" title="Switch color theme">☼</button>
+    </div>
+  </header>
+  <div class="mobile-backdrop" id="mobileBackdrop"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar" aria-label="Documentation navigation">
+      <nav>
+        <div class="nav-group">
+          <p class="sidebar-label">Start here</p>
+          <a class="nav-link active" href="#top"><span class="nav-icon">⌂</span>Overview</a>
+          <a class="nav-link" href="#quick-start"><span class="nav-icon">⌘</span>Quick start</a>
+          <a class="nav-link" href="#installation"><span class="nav-icon">⇩</span>Installation</a>
+          <a class="nav-link" href="#compatibility"><span class="nav-icon">◉</span>Compatibility</a>
+        </div>
+        <div class="nav-group">
+          <p class="sidebar-label">Toolkit</p>
+          <a class="nav-link" href="#features"><span class="nav-icon">✧</span>Qiro extensions</a>
+          <a class="nav-link" href="#release-channels"><span class="nav-icon">◈</span>Release channels</a>
+          <a class="nav-link" href="#examples"><span class="nav-icon">⌁</span>Code examples</a>
+        </div>
+        <div class="nav-group">
+          <p class="sidebar-label">Resources</p>
+          <a class="nav-link" href="#faq"><span class="nav-icon">?</span>FAQ</a>
+          <a class="nav-link" href="#resources"><span class="nav-icon">↗</span>Project links</a>
+          <a class="nav-link" href="#credits"><span class="nav-icon">◇</span>Credits & disclaimer</a>
+        </div>
+      </nav>
+      <div class="sidebar-card">
+        <strong>Built by AwangXCode</strong>
+        <p>An independent Baileys-based toolkit with additional experimental Qiro helpers.</p>
+        <a href="https://github.com/AwangXoffc/qiro-baileys-assets" target="_blank" rel="noreferrer">VISUAL ASSETS ↗</a>
+      </div>
+    </aside>
+    <main id="main-content">
+      <div class="content">
+        <div class="breadcrumbs"><span>Documentation</span><span>／</span><span>Overview</span></div>
+        <section class="hero" id="top">
+          <div class="hero-top">
+            <span class="eyebrow">AWANGXCODE · WHATSAPP WEB TOOLKIT</span>
+            <span class="hero-status">UNOFFICIAL COMMUNITY FORK</span>
+          </div>
+          <h1>Build. Connect.<br><span>Automate with Qiro.</span></h1>
+          <p class="hero-copy">A Baileys-based TypeScript toolkit with additional Qiro extensions. Explore installation, core concepts, experimental helpers, and project resources in one place.</p>
+          <div class="hero-image-wrap">
+            <img class="hero-image" src="https://raw.githubusercontent.com/AwangXoffc/qiro-baileys-assets/main/qiro-banner.png" alt="Qiro Baileys 3D graffiti banner by AwangXCode" loading="eager">
+          </div>
+          <div class="hero-actions">
+            <a class="button primary" href="#installation">Get started <span aria-hidden="true">→</span></a>
+            <a class="button ghost" href="https://www.npmjs.com/package/@awangxcode/qiro-baileys" target="_blank" rel="noreferrer">View on npm ↗</a>
+            <a class="button ghost" href="https://github.com/WhiskeySockets/Baileys" target="_blank" rel="noreferrer">Upstream project ↗</a>
+          </div>
+          <div class="badge-row">
+            <span class="badge purple">TypeScript</span>
+            <span class="badge cyan">Node.js 20+</span>
+            <span class="badge">MIT License</span>
+            <span class="badge">Experimental Qiro extensions</span>
+          </div>
+        </section>
+
+        <section class="section" id="features">
+          <div class="section-head"><div><span class="section-kicker">Toolkit overview</span><h2>One toolkit. More room to build.</h2><p class="section-intro">Qiro combines the Baileys-based WhatsApp Web workflow with a set of additional helpers maintained as experimental extensions.</p></div></div>
+          <div class="feature-grid">
+            <article class="feature-card"><div class="feature-icon">◈</div><h3>Baileys core</h3><p>Connection, authentication, messaging, media, groups, and event workflows inherited from the upstream project.</p><span class="status" style="color:var(--green)">Core toolkit</span></article>
+            <article class="feature-card"><div class="feature-icon">⌘</div><h3>MessageBuilder</h3><p>An additional helper for composing message payloads. Consult the installed release examples for its exact API.</p><span class="status">Experimental</span></article>
+            <article class="feature-card"><div class="feature-icon">▣</div><h3>Button / ButtonV2</h3><p>Additional interactive-message helpers. Availability and behavior can vary across WhatsApp clients.</p><span class="status">Experimental</span></article>
+            <article class="feature-card"><div class="feature-icon">▤</div><h3>Carousel</h3><p>A carousel-style interactive content helper included among the Qiro extension experiments.</p><span class="status">Experimental</span></article>
+            <article class="feature-card"><div class="feature-icon">✧</div><h3>AIRich</h3><p>A rich interactive-message helper. Check the package version and examples before integrating it.</p><span class="status">Experimental</span></article>
+            <article class="feature-card"><div class="feature-icon">⌬</div><h3>TypeScript support</h3><p>Type declarations are distributed with the package to support typed development and editor tooling.</p><span class="status" style="color:var(--green)">Included</span></article>
+          </div>
+          <div class="notice"><span class="notice-icon">ⓘ</span><div><strong>Experimental means experimental.</strong> Interactive-message formats may have client-side limitations and can change between prereleases. Verify exports and examples in the exact version you install.</div></div>
+        </section>
+
+        <section class="section" id="installation">
+          <div class="section-head"><div><span class="section-kicker">Install the package</span><h2>Choose your release channel.</h2><p class="section-intro">The npm <code>latest</code> and <code>next</code> tags are independent. Pick the channel that matches the release you intend to use.</p></div></div>
+          <div class="install-grid">
+            <article class="install-card"><div class="install-card-head"><strong>Prerelease channel</strong><span style="color:var(--primary)">NEXT TAG</span></div><div class="code-block"><code><span class="prompt">$</span> npm install @awangxcode/qiro-baileys@next</code><button class="copy-button" data-copy="npm install @awangxcode/qiro-baileys@next" aria-label="Copy next installation command">▢</button></div></article>
+            <article class="install-card"><div class="install-card-head"><strong>Default channel</strong><span style="color:var(--green)">LATEST TAG</span></div><div class="code-block"><code><span class="prompt">$</span> npm install @awangxcode/qiro-baileys</code><button class="copy-button" data-copy="npm install @awangxcode/qiro-baileys" aria-label="Copy default installation command">▢</button></div></article>
+          </div>
+          <div class="notice"><span class="notice-icon">↗</span><div>Check the <a class="text-link" href="https://www.npmjs.com/package/@awangxcode/qiro-baileys?activeTab=versions" target="_blank" rel="noreferrer">npm versions page</a> before installing. The channel badges on the package README identify the versions currently assigned to each tag.</div></div>
+        </section>
+
+        <section class="section" id="quick-start">
+          <div class="section-head"><div><span class="section-kicker">Getting started</span><h2>Start with the essentials.</h2><p class="section-intro">Install the package, import the default socket factory, then follow the connection and authentication guide for the complete setup.</p></div></div>
+          <div class="steps">
+            <article class="step"><h3>Install</h3><p>Choose the <code>next</code> or <code>latest</code> npm channel based on your release needs.</p></article>
+            <article class="step"><h3>Import</h3><p>Use the package entry point and the API available in your installed version.</p></article>
+            <article class="step"><h3>Connect</h3><p>Follow the account connection and auth-state guide before sending or receiving messages.</p></article>
+          </div>
+        </section>
+
+        <section class="section" id="examples">
+          <div class="section-head"><div><span class="section-kicker">Code example</span><h2>Import the toolkit.</h2><p class="section-intro">This minimal example demonstrates the package import only. For the full socket configuration, QR/pairing flow, and auth-state handling, use the detailed guide in the README index.</p></div><a class="text-link" href="https://github.com/WhiskeySockets/Baileys" target="_blank" rel="noreferrer">Core API reference ↗</a></div>
+          <div class="code-large">
+            <div class="code-titlebar"><span>example.ts</span><span class="window-dots"><i></i><i></i><i></i></span></div>
+            <pre><span class="tok-purple">import</span> makeWASocket <span class="tok-purple">from</span> <span class="tok-green">'@awangxcode/qiro-baileys'</span>
+
+<span class="tok-muted">// Continue with the connection and authentication guide.</span>
+<span class="tok-muted">// See the package README for the complete API index.</span></pre>
+            <button class="copy-button" data-copy="import makeWASocket from '@awangxcode/qiro-baileys'" aria-label="Copy import example">▢</button>
+          </div>
+          <div class="notice"><span class="notice-icon">⌁</span><div>The package README preserves the extended Baileys API guide, including account connection, authentication, events, messaging, groups, and media. Use that guide together with the version installed in your project.</div></div>
+        </section>
+
+        <section class="section" id="compatibility">
+          <div class="section-head"><div><span class="section-kicker">Environment</span><h2>Compatibility at a glance.</h2><p class="section-intro">The published package declares Node.js 20 or newer as its runtime requirement.</p></div></div>
+          <div class="table-wrap"><table><thead><tr><th>Area</th><th>Declared / documented support</th><th>Notes</th></tr></thead><tbody><tr><td>Runtime</td><td>Node.js ≥ 20</td><td>Matches the package engine requirement.</td></tr><tr><td>Language</td><td>TypeScript declarations included</td><td>Types are distributed with the package.</td></tr><tr><td>Release channel</td><td>npm latest / next</td><td>Independent distribution tags.</td></tr><tr><td>Interactive helpers</td><td>Experimental</td><td>Client compatibility is not guaranteed.</td></tr></tbody></table></div>
+        </section>
+
+        <section class="section" id="release-channels">
+          <div class="section-head"><div><span class="section-kicker">Release strategy</span><h2>Understand the npm tags.</h2><p class="section-intro">A dist-tag is a human-readable pointer to a published package version. The two channels can point to different releases.</p></div></div>
+          <div class="feature-grid" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+            <article class="feature-card"><div class="feature-icon">◉</div><h3><code>latest</code></h3><p>The package version selected as the default when installing without a tag.</p><span class="badge" style="color:var(--green)">Default install</span></article>
+            <article class="feature-card"><div class="feature-icon">✦</div><h3><code>next</code></h3><p>A separate prerelease channel for trying the newer development release.</p><span class="badge purple">Prerelease channel</span></article>
+          </div>
+        </section>
+
+        <section class="section" id="faq">
+          <div class="section-head"><div><span class="section-kicker">Need to know</span><h2>Frequently asked questions.</h2></div></div>
+          <div class="faq-list">
+            <details><summary>Is Qiro Baileys an official WhatsApp or Meta SDK?</summary><p>No. Qiro Baileys is an unofficial community distribution based on the Baileys project. It is not affiliated with WhatsApp, Meta, or the upstream maintainers.</p></details>
+            <details><summary>Should I install <code>latest</code> or <code>next</code>?</summary><p>Use the default installation for the version assigned to <code>latest</code>. Use <code>@next</code> when you intentionally want the prerelease channel. Check the npm versions page before choosing.</p></details>
+            <details><summary>Are Qiro interactive extensions production-stable?</summary><p>The helpers described here are experimental. Their behavior can vary across WhatsApp clients and release versions. Verify the exports and test with a separate account before production use.</p></details>
+            <details><summary>Where can I find the full API guide?</summary><p>Start with the API index preserved in the package README. For Baileys core behavior, also consult the upstream repository and documentation.</p></details>
+            <details><summary>What Node.js version do I need?</summary><p>The package declares Node.js 20.0.0 or newer in its engine requirement.</p></details>
+          </div>
+        </section>
+
+        <section class="section" id="resources">
+          <div class="section-head"><div><span class="section-kicker">Explore the ecosystem</span><h2>Project resources.</h2><p class="section-intro">Useful destinations for package releases, upstream documentation, and Qiro visual assets.</p></div></div>
+          <div class="resource-grid">
+            <a class="resource" href="https://www.npmjs.com/package/@awangxcode/qiro-baileys" target="_blank" rel="noreferrer"><span>Package registry</span><strong>Qiro Baileys on npm</strong><em>Open package ↗</em></a>
+            <a class="resource" href="https://github.com/WhiskeySockets/Baileys" target="_blank" rel="noreferrer"><span>Upstream source</span><strong>WhiskeySockets / Baileys</strong><em>View repository ↗</em></a>
+            <a class="resource" href="https://baileys.wiki/" target="_blank" rel="noreferrer"><span>Core documentation</span><strong>Baileys Wiki</strong><em>Read docs ↗</em></a>
+            <a class="resource" href="https://github.com/AwangXoffc/qiro-baileys-assets" target="_blank" rel="noreferrer"><span>Brand resources</span><strong>Qiro visual assets</strong><em>View assets ↗</em></a>
+            <a class="resource" href="https://www.npmjs.com/package/@awangxcode/qiro-baileys?activeTab=versions" target="_blank" rel="noreferrer"><span>Release history</span><strong>All published versions</strong><em>Check versions ↗</em></a>
+            <a class="resource" href="https://github.com/WhiskeySockets/Baileys#readme" target="_blank" rel="noreferrer"><span>Upstream guide</span><strong>Baileys README</strong><em>Open guide ↗</em></a>
+          </div>
+        </section>
+
+        <section class="section" id="credits">
+          <div class="section-head"><div><span class="section-kicker">Project notes</span><h2>Credits, scope & disclaimer.</h2></div></div>
+          <div class="callout"><strong>Unofficial project — use responsibly.</strong><p>Qiro Baileys is an independent distribution based on WhiskeySockets/Baileys, with additional experimental helpers maintained by AwangXCode. It is not affiliated with WhatsApp, Meta, or the upstream maintainers. Users are responsible for complying with applicable terms and laws. Preserve the upstream license and notices when redistributing the project.</p></div>
+        </section>
+
+        <footer>
+          <div><strong>⚡ QIRO BAILEYS</strong><br>AWANGXCODE · WHATSAPP WEB TOOLKIT</div>
+          <div class="footer-links"><a href="https://www.npmjs.com/package/@awangxcode/qiro-baileys" target="_blank" rel="noreferrer">npm</a><a href="https://github.com/WhiskeySockets/Baileys" target="_blank" rel="noreferrer">Upstream</a><a href="https://github.com/AwangXoffc/qiro-baileys-assets" target="_blank" rel="noreferrer">Assets</a><a href="#top">Back to top ↑</a></div>
+        </footer>
+      </div>
+    </main>
+  </div>
+  <div class="overlay" id="searchOverlay" role="dialog" aria-modal="true" aria-label="Search documentation">
+    <div class="search-dialog">
+      <div class="search-input-wrap"><span aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="Search pages and topics..." autocomplete="off"><button class="icon-button" id="closeSearch" aria-label="Close search">×</button></div>
+      <div class="search-results" id="searchResults"><div class="search-empty">Type to search the documentation.</div></div>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite">Copied to clipboard</div>
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const themeButton = document.getElementById('themeButton');
+      const menuButton = document.getElementById('menuButton');
+      const sidebar = document.getElementById('sidebar');
+      const backdrop = document.getElementById('mobileBackdrop');
+      const overlay = document.getElementById('searchOverlay');
+      const searchInput = document.getElementById('searchInput');
+      const searchResults = document.getElementById('searchResults');
+      const toast = document.getElementById('toast');
+      let toastTimer;
+
+      const setTheme = (theme) => {
+        root.dataset.theme = theme;
+        themeButton.textContent = theme === 'dark' ? '☼' : '☾';
+        themeButton.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+        try { localStorage.setItem('qiro-docs-theme', theme); } catch (_) { /* Storage may be unavailable. */ }
+      };
+      let savedTheme = 'dark';
+      try { savedTheme = localStorage.getItem('qiro-docs-theme') || 'dark'; } catch (_) { /* Keep default. */ }
+      setTheme(savedTheme === 'light' ? 'light' : 'dark');
+      themeButton.addEventListener('click', () => setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
+
+      const closeMenu = () => {
+        sidebar.classList.remove('open');
+        backdrop.classList.remove('show');
+        menuButton.setAttribute('aria-expanded', 'false');
+      };
+      menuButton.addEventListener('click', () => {
+        const opening = !sidebar.classList.contains('open');
+        sidebar.classList.toggle('open', opening);
+        backdrop.classList.toggle('show', opening);
+        menuButton.setAttribute('aria-expanded', String(opening));
+      });
+      backdrop.addEventListener('click', closeMenu);
+      sidebar.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+
+      const toastMessage = (message) => {
+        toast.textContent = message;
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove('show'), 1700);
+      };
+      document.querySelectorAll('[data-copy]').forEach(button => {
+        button.addEventListener('click', async () => {
+          const value = button.dataset.copy || '';
+          try {
+            await navigator.clipboard.writeText(value);
+            toastMessage('Copied to clipboard');
+          } catch (_) {
+            const area = document.createElement('textarea');
+            area.value = value;
+            area.style.position = 'fixed';
+            area.style.opacity = '0';
+            document.body.appendChild(area);
+            area.select();
+            try { document.execCommand('copy'); toastMessage('Copied to clipboard'); }
+            catch (error) { toastMessage('Copy unavailable in this browser'); }
+            area.remove();
+          }
+        });
+      });
+
+      const pages = [...document.querySelectorAll('.nav-link')].map(link => ({
+        title: link.textContent.trim(),
+        href: link.getAttribute('href'),
+        section: document.querySelector(link.getAttribute('href'))
+      }));
+      const openSearch = () => {
+        overlay.classList.add('open');
+        searchInput.value = '';
+        renderResults('');
+        setTimeout(() => searchInput.focus(), 20);
+      };
+      const closeSearch = () => overlay.classList.remove('open');
+      document.getElementById('searchTrigger').addEventListener('click', openSearch);
+      document.getElementById('closeSearch').addEventListener('click', closeSearch);
+      overlay.addEventListener('click', event => { if (event.target === overlay) closeSearch(); });
+      const renderResults = query => {
+        const normalized = query.trim().toLowerCase();
+        const matches = pages.filter(item => {
+          const body = item.section ? item.section.innerText.toLowerCase() : '';
+          return !normalized || item.title.toLowerCase().includes(normalized) || body.includes(normalized);
+        }).slice(0, 9);
+        searchResults.replaceChildren();
+        if (!matches.length) {
+          const empty = document.createElement('div');
+          empty.className = 'search-empty';
+          empty.textContent = 'No matching sections found.';
+          searchResults.appendChild(empty);
+          return;
+        }
+        matches.forEach(item => {
+          const link = document.createElement('a');
+          link.className = 'search-result';
+          link.href = item.href;
+          const title = document.createElement('span');
+          title.textContent = item.title;
+          const note = document.createElement('small');
+          note.textContent = item.section ? (item.section.querySelector('h2')?.textContent || 'Documentation section') : 'Documentation';
+          link.append(title, note);
+          link.addEventListener('click', closeSearch);
+          searchResults.appendChild(link);
+        });
+      };
+      searchInput.addEventListener('input', () => renderResults(searchInput.value));
+      document.addEventListener('keydown', event => {
+        if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
+          event.preventDefault();
+          openSearch();
+        }
+        if (event.key === 'Escape') {
+          closeSearch();
+          closeMenu();
+        }
+      });
+
+      const navLinks = [...document.querySelectorAll('.nav-link')];
+      const observed = navLinks.map(link => ({ link, section: document.querySelector(link.getAttribute('href')) })).filter(item => item.section);
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(entries => {
+          const visible = entries.filter(entry => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+          if (!visible) return;
+          navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${visible.target.id}`));
+        }, { rootMargin: '-20% 0px -65% 0px', threshold: [0, .1, .25, .5] });
+        observed.forEach(item => observer.observe(item.section));
+      }
+    })();
+  </script>
+</body>
+</html>
